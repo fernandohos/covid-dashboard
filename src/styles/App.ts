@@ -3,6 +3,9 @@ import styled from 'styled-components';
 export const Container = styled.div`
     max-width: 120rem;
     margin: auto;
+    @media (max-width: 670px) {
+        width: 90vw;
+    }
 `;
 
 export const Title = styled.h1`
@@ -62,7 +65,7 @@ export const SearchBar = styled.div<{xIcon: string}>`
     border-radius: 1rem;
     margin-top: 3rem;
 
-    div {
+    form {
         background: var(--card-background);
         border-radius: inherit;
         margin: 0;
@@ -98,8 +101,7 @@ export const SearchBar = styled.div<{xIcon: string}>`
         }
     }
 
-
-    div:focus-within {
+    form:focus-within {
         background: var(--card-background-transparent);
         transition: all ease .2s;
     }

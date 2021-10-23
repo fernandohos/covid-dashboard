@@ -1,6 +1,7 @@
 import React from 'react';
 import * as C from './styles/App';
 import xImg from './assets/x.png';
+import {Cards} from './components/Cards';
 
 function App() {
   return (
@@ -19,11 +20,14 @@ function App() {
           </div>
         </C.CasesWrapper>
         <C.SearchBar xIcon={xImg}>
-          <div>
+          <form>
               <input placeholder="search..." type="search" />
-          </div>
+          </form>
         </C.SearchBar>
       </C.WorldStats>
+
+      <Cards />
+      
     </C.Container>
   );
 }
