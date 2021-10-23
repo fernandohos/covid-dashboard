@@ -9,6 +9,7 @@ export const GlobalStyle = createGlobalStyle`
     html {
         --background: #1B283A;
         --card-background: #243143;
+        --card-background-transparent: #24314300;
         --chart-card-background: #2D3A4C;
         --gradient: linear-gradient(135deg, #ff6701, #ff0973);
         --text-color: #fff;

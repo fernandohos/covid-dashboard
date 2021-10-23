@@ -13,8 +13,8 @@ export const Title = styled.h1`
     margin: 2.5rem auto;
 `;
 
-export const WorldStats = styled.div`
-    max-width: 600px;
+export const WorldStats = styled.div`   
+    max-width: 60rem;
     width: 100%;
     text-align: center;
     margin: auto;
@@ -52,5 +52,55 @@ export const CasesWrapper = styled.div`
             text-align: right;
         }
     }
+`;
 
+export const SearchBar = styled.div<{xIcon: string}>`
+    max-width: 60rem;
+    background: var(--gradient);
+    height: 50px;
+    padding: 0;
+    border-radius: 1rem;
+    margin-top: 3rem;
+
+    div {
+        background: var(--card-background);
+        border-radius: inherit;
+        margin: 0;
+        padding: .3rem;
+        height: 100%;
+        box-sizing: border-box;
+
+        input {
+            border-radius: .8rem;
+            display: block;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            outline: none;
+            border: none;
+            background: var(--card-background);
+            box-sizing: border-box;
+            padding: 1rem;
+            color: var(--text-color);
+
+            &::placeholder {
+                color: var(--text-color);
+            }
+
+            &::-webkit-search-cancel-button {
+                background-image: url(${props => props.xIcon});
+                -webkit-appearance: none;
+                background-position: center;
+                background-size: cover;
+                height: 15px;
+                width: 15px;
+            }
+        }
+    }
+
+
+    div:focus-within {
+        background: var(--card-background-transparent);
+        transition: all ease .2s;
+    }
 `;
