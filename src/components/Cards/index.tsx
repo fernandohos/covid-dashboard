@@ -34,6 +34,7 @@ type ApiData = {
 export function Cards() {
     const [countries, setCountries] = React.useState<CardDataType[]>([]);
     const [loading, setLoading] = React.useState(false);
+    const [names, setNames] = React.useState<string[]>([]);
 
     React.useEffect(() => {
         setLoading(true);
@@ -41,26 +42,30 @@ export function Cards() {
 
             fetch("https://covid-api.mmediagroup.fr/v1/cases")
             .then(res => res.json())
-            .then(data => Object.values<ApiData>(data))
+            .then(data => {
+                setNames(Object.keys(data));
+                return Object.values<ApiData>(data);
+            })
             .then(data => data.map(obj => {
                 const {All} = obj;
                 return All;
             }))
             .then(countries => {
-                return countries.map(countryObj => {
-                    const { abbreviation, confirmed, continent, country: name, deaths, population} = countryObj;
+                return countries.map((countryObj, i) => {
+                    const { abbreviation, confirmed, continent, deaths, population} = countryObj;
+                    let name = countryObj.country ?? names[i];
                     return { abbreviation, confirmed, continent, name, deaths, population};
                 })
             })
             .then(formatedCountries => {
-                setCountries(formatedCountries)
+                setCountries(formatedCountries);
+                setLoading(false);
             });
 
-            setLoading(false);
         }
         getCountries();
 
-    }, [])
+    }, [names])
     return (
         <C.Container>
             {
@@ -71,14 +76,6 @@ export function Cards() {
                     <Card key={country.name} {...country} />
                 ))
             }
-
-            {/* <Card {...{
-                name: "Brazil",
-                abbreviation: "BR",
-                confirmed: 5030236,
-                deaths: 604356,
-                continent: "South America"
-            }} /> */}
         </C.Container>
     )
 }
