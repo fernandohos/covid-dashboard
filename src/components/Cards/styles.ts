@@ -12,4 +12,12 @@ export const Container = styled.div`
     @media (max-width: 1200px) {
         grid-template-columns: repeat(3, 25rem);
     }
+    
+    @media (max-width: 900px) {
+        grid-template-columns: repeat(2, 25rem);
+    }
+
+    @media (max-width: 600px) {
+        grid-template-columns: repeat(1, 25rem);
+    }
 `;
