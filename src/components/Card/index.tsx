@@ -1,5 +1,10 @@
 import React from 'react';
 import * as C from './styles';
+import africa from '../../assets/africa.png';
+import america from '../../assets/america.png';
+import asia from '../../assets/asia.png';
+import europe from '../../assets/europe.png';
+import oceania from '../../assets/oceania.png';
 
 type Props = {
     name: string;
@@ -9,14 +14,42 @@ type Props = {
     continent: string;
 }
 
-export function Card({name, abbreviation, confirmed, deaths, continent}: Props) {
+export function Card({ name, abbreviation, confirmed, deaths, continent }: Props) {
+
+    function returnContinent(continentName: string) {
+        switch (continentName) {
+            case "South America":
+                return america;
+            case "Europe":
+                return europe;
+            case "Asia":
+                return asia;
+            case "Africa":
+                return africa;
+            case "Oceania":
+                return oceania;
+            case "North America":
+                return america;
+        }
+    }
+
     return (
         <C.Container>
-            <p>{name}</p>
-            <p>{abbreviation}</p>
-            <p>{confirmed}</p>
-            <p>{deaths}</p>
-            <p>{continent}</p>
+            <C.Border>
+            <div className="wrapper">
+                <C.CountryName>{name}</C.CountryName>
+                <C.CountryAbbr>{abbreviation}</C.CountryAbbr>
+                <C.StatsTitle>Confirmed</C.StatsTitle>
+                <C.StatsInfo color="#4f4">{confirmed}</C.StatsInfo>
+                <div>
+                    <div>
+                        <C.StatsTitle>Deaths</C.StatsTitle>
+                        <C.StatsInfo color="#f44">{deaths}</C.StatsInfo>
+                    </div>
+                    <img src={returnContinent(continent)} alt={continent} />
+                </div>
+            </div>
+            </C.Border>
         </C.Container>
     );
 }
