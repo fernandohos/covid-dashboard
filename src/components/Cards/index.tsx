@@ -71,6 +71,14 @@ export function Cards() {
                     <Card key={country.name} {...country} />
                 ))
             }
+
+            {/* <Card {...{
+                name: "Brazil",
+                abbreviation: "BR",
+                confirmed: 5030236,
+                deaths: 604356,
+                continent: "South America"
+            }} /> */}
         </C.Container>
     )
 }
