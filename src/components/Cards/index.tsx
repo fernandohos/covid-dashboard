@@ -2,17 +2,16 @@ import React, { useContext } from 'react';
 import * as C from './styles';
 import { Card } from '../Card';
 import {CountriesContext} from '../../context/CountriesContext';
+import {useRouteMatch} from 'react-router-dom';
 
-type Props = {
-    match: {
-        params: {
-            page: string;
-        }
-    }
+type matchType = {
+    page: string;
 }
 
-export function Cards({ match }: Props) {
+export function Cards() {
     const {returnCurrentPageData, loading} = useContext(CountriesContext);
+    const match = useRouteMatch<matchType>();
+
     return (
         <C.Container>
             {
