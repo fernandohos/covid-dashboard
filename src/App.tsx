@@ -4,6 +4,7 @@ import xImg from './assets/x.png';
 import { Cards } from './components/Cards';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { Country } from './components/Country';
+import {Pagination} from './components/Pagination';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
               </C.SearchBar>
             </C.WorldStats>
             <Cards />
+            <Pagination />
           </Route>
           <Route path="/country/:country" component={Country} />
           <Route path="*">

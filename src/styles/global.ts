@@ -16,6 +16,7 @@ export const GlobalStyle = createGlobalStyle`
         --confirmed-font-color: #44ff44;
         --deaths-font-color: #ff4444;
         font-size: 62.5%;
+        scroll-behavior: smooth;
     }
     body {
         font-size: 2.0rem;
