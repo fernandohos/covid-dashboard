@@ -2,6 +2,8 @@ import React from 'react';
 import * as C from './styles/App';
 import xImg from './assets/x.png';
 import {Cards} from './components/Cards';
+import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
+import { Country } from './components/Country';
 
 function App() {
   return (
@@ -26,7 +28,15 @@ function App() {
         </C.SearchBar>
       </C.WorldStats>
 
-      <Cards />
+      <Router>
+        <Switch>
+          <Route path="/page/:page" component={Cards} />
+          <Route path="/country/:country" component={Country} />
+          <Route path="*">
+            <Redirect to="/page/1" />
+          </Route>
+        </Switch>
+      </Router>
       
     </C.Container>
   );
