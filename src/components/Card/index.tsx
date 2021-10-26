@@ -7,14 +7,14 @@ import europe from '../../assets/europe.png';
 import oceania from '../../assets/oceania.png';
 
 type Props = {
-    name: string;
+    country: string;
     abbreviation: string;
     confirmed: number;
     deaths: number;
     continent: string;
 }
 
-export function Card({ name, abbreviation, confirmed, deaths, continent }: Props) {
+export function Card({ country, abbreviation, confirmed, deaths, continent }: Props) {
 
     function returnContinent(continentName: string) {
         switch (continentName) {
@@ -37,7 +37,7 @@ export function Card({ name, abbreviation, confirmed, deaths, continent }: Props
         <C.Container>
             <C.Border>
             <div className="wrapper">
-                <C.CountryName>{name}</C.CountryName>
+                <C.CountryName>{country}</C.CountryName>
                 <C.CountryAbbr>{abbreviation}</C.CountryAbbr>
                 <C.StatsTitle>Confirmed</C.StatsTitle>
                 <C.StatsInfo color="#4f4">{confirmed}</C.StatsInfo>
