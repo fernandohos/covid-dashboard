@@ -67,7 +67,7 @@ export const PagesContainer = styled.nav<{pageCount: number}>`
     }
 `;
 
-export const PageLink = styled.div`
+export const PageLink = styled.div<{currentPage: number}>`
     width: 3.5rem;
     height: 3.5rem;
     margin: 1.5rem;
@@ -75,6 +75,9 @@ export const PageLink = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    &:nth-child(${({currentPage}) => currentPage}) {
+        background: #c4c4c488;
+    }
 
     &:hover {
         background: #c4c4c455;

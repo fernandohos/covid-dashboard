@@ -43,7 +43,7 @@ export function Pagination() {
                         {
                             Array(pagesCount).fill('hi').map((n, i) => {
                                 return (
-                                    <C.PageLink onClick={() => scrollTop()} key={i}>
+                                    <C.PageLink currentPage={Number(page)} onClick={() => scrollTop()} key={i}>
                                         <Link to={`/page/${i + 1}`}>{`${i + 1}`}</Link>
                                     </C.PageLink>
                                 );
