@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import * as C from './styles/App';
 import xImg from './assets/x.png';
 import { Cards } from './components/Cards';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { Country } from './components/Country';
 import {Pagination} from './components/Pagination';
+import { CountriesContext } from './context/CountriesContext';
 
 function App() {
+  const {loading} = useContext(CountriesContext);
   return (
     <C.Container>
       <C.Title>Covid-19 Dashboard</C.Title>
@@ -32,7 +34,9 @@ function App() {
               </C.SearchBar>
             </C.WorldStats>
             <Cards />
-            <Pagination />
+            {
+              !loading && <Pagination />
+            }
           </Route>
           <Route path="/country/:country" component={Country} />
           <Route path="*">

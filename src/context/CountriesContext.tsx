@@ -35,9 +35,6 @@ export default function CountriesProvider({ children }: Prop) {
     const pagesCount = Math.ceil(countries.length / cardsPerPage);
 
     function returnCurrentPageData(currentPage: number): CountryType[] {
-        console.log('currentPage ', currentPage);
-        console.log('countries length ' + countries.length);
-
         const startIndex = currentPage > 0 ? (currentPage - 1) * cardsPerPage : 0;
 
         const finishIndex = (startIndex + cardsPerPage) > countries.length ? countries.length - 1 : startIndex + cardsPerPage
@@ -47,11 +44,9 @@ export default function CountriesProvider({ children }: Prop) {
 
     // getCountries 
     React.useEffect(() => {
-        console.log('renderizou')
         let names:string[] = [];
 
-        setLoading(true);
-        async function getCountries() {
+        async function getCountriesFromApi() {
             fetch("https://covid-api.mmediagroup.fr/v1/cases")
                 .then(res => res.json())
                 .then(data => {
@@ -70,11 +65,34 @@ export default function CountriesProvider({ children }: Prop) {
                     })
                 })
                 .then(formatedCountries => {
+                    const lastUpdateTimeStampString = new Date().getTime().toString();
+                    localStorage.setItem('@LastUpdate', lastUpdateTimeStampString);
+                    localStorage.setItem('@CountriesData', JSON.stringify(formatedCountries));
                     setCountries(formatedCountries);
                     setLoading(false);
                 });
         }
-        getCountries();
+
+        function getCountriesFromLocalStorage() {
+            console.log('data from localStorage');
+            const countriesFromLs = localStorage.getItem('@CountriesData');
+            if(countriesFromLs) {
+                setCountries(JSON.parse(countriesFromLs));
+            }
+        }
+
+        const lsLastUpdateMilliseconds = Number(localStorage.getItem('@LastUpdate'));
+        const secondsSinceLastUpdate = (new Date().getTime() - lsLastUpdateMilliseconds) / 1000;
+        
+        if(!lsLastUpdateMilliseconds || secondsSinceLastUpdate > 600) {
+            console.log('data from api');
+            getCountriesFromApi();
+            setLoading(true);
+        }
+        else if(lsLastUpdateMilliseconds && secondsSinceLastUpdate < 600) {
+            getCountriesFromLocalStorage();
+        }
+
     }, []);
 
     return (
