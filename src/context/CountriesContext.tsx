@@ -22,6 +22,7 @@ type ContextType = {
     returnCurrentPageData: (currentPage: number) => CountryType[];
     pagesCount: number;
     loading: boolean;
+    returnCountryByTerm: (term: string, termType: "name" | "abbreviation") => CountryType;
 }
 
 export const CountriesContext = createContext({} as ContextType);
@@ -42,9 +43,28 @@ export default function CountriesProvider({ children }: Prop) {
         return countries.slice(startIndex, finishIndex);
     }
 
+    function returnCountryByTerm(term: string, termType: 'name' | 'abbreviation'): CountryType {
+        let findedCountryByAbbr = {} as CountryType;
+
+        countries.forEach(country => {
+            if(termType === 'abbreviation') {
+                if(country.abbreviation === term.toUpperCase()) {
+                    findedCountryByAbbr = country;
+                }
+            }
+            else if(termType === 'name') {
+                if(country.country === term) {
+                    findedCountryByAbbr = country;
+                }
+            }
+        })
+
+        return findedCountryByAbbr;
+    }
+
     // getCountries 
     React.useEffect(() => {
-        let names:string[] = [];
+        let names: string[] = [];
 
         async function getCountriesFromApi() {
             fetch("https://covid-api.mmediagroup.fr/v1/cases")
@@ -76,27 +96,27 @@ export default function CountriesProvider({ children }: Prop) {
         function getCountriesFromLocalStorage() {
             console.log('data from localStorage');
             const countriesFromLs = localStorage.getItem('@CountriesData');
-            if(countriesFromLs) {
+            if (countriesFromLs) {
                 setCountries(JSON.parse(countriesFromLs));
             }
         }
 
         const lsLastUpdateMilliseconds = Number(localStorage.getItem('@LastUpdate'));
         const secondsSinceLastUpdate = (new Date().getTime() - lsLastUpdateMilliseconds) / 1000;
-        
-        if(!lsLastUpdateMilliseconds || secondsSinceLastUpdate > 600) {
+
+        if (!lsLastUpdateMilliseconds || secondsSinceLastUpdate > 600) {
             console.log('data from api');
             getCountriesFromApi();
             setLoading(true);
         }
-        else if(lsLastUpdateMilliseconds && secondsSinceLastUpdate < 600) {
+        else if (lsLastUpdateMilliseconds && secondsSinceLastUpdate < 600) {
             getCountriesFromLocalStorage();
         }
 
     }, []);
 
     return (
-        <CountriesContext.Provider value={{ returnCurrentPageData, pagesCount, loading }}>
+        <CountriesContext.Provider value={{ returnCurrentPageData, returnCountryByTerm, pagesCount, loading}}>
             {children}
         </CountriesContext.Provider>
     )
