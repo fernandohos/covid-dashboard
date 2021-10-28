@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-    max-width: 120rem;
+    /* max-width: 120rem; */
     margin: auto;
     @media (max-width: 670px) {
         width: 90vw;

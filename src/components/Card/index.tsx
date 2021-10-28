@@ -5,6 +5,7 @@ import america from '../../assets/america.png';
 import asia from '../../assets/asia.png';
 import europe from '../../assets/europe.png';
 import oceania from '../../assets/oceania.png';
+import { useHistory } from 'react-router-dom';
 
 type Props = {
     country: string;
@@ -15,6 +16,7 @@ type Props = {
 }
 
 export function Card({ country, abbreviation, confirmed, deaths, continent }: Props) {
+    const history = useHistory();
 
     function returnContinent(continentName: string) {
         switch (continentName) {
@@ -33,8 +35,17 @@ export function Card({ country, abbreviation, confirmed, deaths, continent }: Pr
         }
     }
 
+    function handleRedirect() {
+        if(!abbreviation) {
+            history.push(`/country/${abbreviation}?country=${encodeURI(country)}`);
+        }
+        else {
+            history.push(`/country/${abbreviation}`);
+        }
+    }
+
     return (
-        <C.Container>
+        <C.Container onClick={() => handleRedirect()}>
             <C.Border>
             <div className="wrapper">
                 <C.CountryName>{country}</C.CountryName>
