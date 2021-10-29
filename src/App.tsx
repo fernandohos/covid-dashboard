@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { FormEvent, useContext } from 'react';
 import * as C from './styles/App';
 import xImg from './assets/x.png';
 import { Cards } from './components/Cards';
@@ -9,6 +9,10 @@ import { CountriesContext } from './context/CountriesContext';
 
 function App() {
   const {search} = useContext(CountriesContext);
+
+  function handleFormSubmit(e: FormEvent) {
+    e.preventDefault();
+  }
   return (
     <C.Container>
       <C.Title>Covid-19 Dashboard</C.Title>
@@ -28,7 +32,7 @@ function App() {
                 </div>
               </C.CasesWrapper>
               <C.SearchBar xIcon={xImg}>
-                <form>
+                <form onSubmit={handleFormSubmit}>
                   <input placeholder="search..." type="search" value={search.searchTerm} onChange={e => search.setSearchTerm(e.target.value)} />
                 </form>
               </C.SearchBar>
