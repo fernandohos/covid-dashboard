@@ -8,7 +8,7 @@ import {Pagination} from './components/Pagination';
 import { CountriesContext } from './context/CountriesContext';
 
 function App() {
-  const {loading} = useContext(CountriesContext);
+  const {loading, search} = useContext(CountriesContext);
   return (
     <C.Container>
       <C.Title>Covid-19 Dashboard</C.Title>
@@ -29,13 +29,13 @@ function App() {
               </C.CasesWrapper>
               <C.SearchBar xIcon={xImg}>
                 <form>
-                  <input placeholder="search..." type="search" />
+                  <input placeholder="search..." type="search" value={search.searchTerm} onChange={e => search.setSearchTerm(e.target.value)} />
                 </form>
               </C.SearchBar>
             </C.WorldStats>
             <Cards />
             {
-              !loading && <Pagination />
+              search.searchTerm === '' && <Pagination />
             }
           </Route>
           <Route path="/country/:country" component={Country} />

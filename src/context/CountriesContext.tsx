@@ -23,6 +23,11 @@ type ContextType = {
     pagesCount: number;
     loading: boolean;
     returnCountryByTerm: (term: string, termType: "name" | "abbreviation") => CountryType;
+    search: {
+        searchTerm: string;
+        setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
+    };
+    countriesSearch: CountryType[];
 }
 
 export const CountriesContext = createContext({} as ContextType);
@@ -32,6 +37,33 @@ export default function CountriesProvider({ children }: Prop) {
     const [countries, setCountries] = React.useState<CountryType[]>([]);
     const [loading, setLoading] = React.useState(false);
     const cardsPerPage = 20;
+
+    const [countriesSearch, setCountriesSearch] = React.useState<CountryType[]>([]);
+    const [searchTerm, setSearchTerm] = React.useState('');
+
+    React.useEffect(() => {
+        function returnCountriesFromSearch() {
+            const filteredCountries = countries.filter(country => {
+                if(searchTerm === '') return false;
+                
+                const splitedCountryName = country.country.split(' ');
+                return splitedCountryName.some(countryName => {
+                    if(countryName.toLowerCase().indexOf(searchTerm.toLowerCase()) === 0) return true;
+                    return false;
+                });
+
+            })
+            const organizedCountries = filteredCountries.sort((a, b) => {
+                // a < b = -1
+                // a > b = 1
+                return a.country.toLowerCase().indexOf(searchTerm.toLowerCase()) > b.country.toLowerCase().indexOf(searchTerm.toLowerCase()) ? 1 : -1
+            })
+            setCountriesSearch(organizedCountries);
+        }
+        if(searchTerm) {
+            returnCountriesFromSearch();
+        }
+    }, [searchTerm, countries])
 
     const pagesCount = Math.ceil(countries.length / cardsPerPage);
 
@@ -116,7 +148,7 @@ export default function CountriesProvider({ children }: Prop) {
     }, []);
 
     return (
-        <CountriesContext.Provider value={{ returnCurrentPageData, returnCountryByTerm, pagesCount, loading}}>
+        <CountriesContext.Provider value={{ returnCurrentPageData, returnCountryByTerm, pagesCount, loading, countriesSearch,search: {searchTerm, setSearchTerm}}}>
             {children}
         </CountriesContext.Provider>
     )
