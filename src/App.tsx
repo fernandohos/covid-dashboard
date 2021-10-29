@@ -8,7 +8,7 @@ import {Pagination} from './components/Pagination';
 import { CountriesContext } from './context/CountriesContext';
 
 function App() {
-  const {loading, search} = useContext(CountriesContext);
+  const {search} = useContext(CountriesContext);
   return (
     <C.Container>
       <C.Title>Covid-19 Dashboard</C.Title>

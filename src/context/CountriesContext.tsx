@@ -46,6 +46,8 @@ export default function CountriesProvider({ children }: Prop) {
             const filteredCountries = countries.filter(country => {
                 if(searchTerm === '') return false;
                 
+                if(country.country.toLowerCase().indexOf(searchTerm.toLowerCase()) === 0) return true;
+
                 const splitedCountryName = country.country.split(' ');
                 return splitedCountryName.some(countryName => {
                     if(countryName.toLowerCase().indexOf(searchTerm.toLowerCase()) === 0) return true;
