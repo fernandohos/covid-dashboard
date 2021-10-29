@@ -21,7 +21,19 @@ export const GlobalStyle = createGlobalStyle`
     body {
         font-size: 2.0rem;
         background: var(--background);
-        color: var(--text-color)
+        color: var(--text-color);
+
+        &::-webkit-scrollbar {
+            /* height: 5px; */
+            width: 6px;
+            background: transparent;
+            border-radius: .8rem;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: var(--gradient);
+            border-radius: 10px;
+        }
     }
 
     @media (prefers-color-scheme: light) {
