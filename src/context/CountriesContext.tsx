@@ -44,13 +44,13 @@ export default function CountriesProvider({ children }: Prop) {
     React.useEffect(() => {
         function returnCountriesFromSearch() {
             const filteredCountries = countries.filter(country => {
-                if(searchTerm === '') return false;
+                if(searchTerm.trim() === '') return false;
                 
-                if(country.country.toLowerCase().indexOf(searchTerm.toLowerCase()) === 0) return true;
+                if(country.country.toLowerCase().indexOf(searchTerm.trim().toLowerCase()) === 0) return true;
 
                 const splitedCountryName = country.country.split(' ');
                 return splitedCountryName.some(countryName => {
-                    if(countryName.toLowerCase().indexOf(searchTerm.toLowerCase()) === 0) return true;
+                    if(countryName.toLowerCase().indexOf(searchTerm.trim().toLowerCase()) === 0) return true;
                     return false;
                 });
 
@@ -58,11 +58,11 @@ export default function CountriesProvider({ children }: Prop) {
             const organizedCountries = filteredCountries.sort((a, b) => {
                 // a < b = -1
                 // a > b = 1
-                return a.country.toLowerCase().indexOf(searchTerm.toLowerCase()) > b.country.toLowerCase().indexOf(searchTerm.toLowerCase()) ? 1 : -1
+                return a.country.toLowerCase().indexOf(searchTerm.trim().toLowerCase()) > b.country.toLowerCase().indexOf(searchTerm.trim().toLowerCase()) ? 1 : -1
             })
             setCountriesSearch(organizedCountries);
         }
-        if(searchTerm) {
+        if(searchTerm.trim()) {
             returnCountriesFromSearch();
         }
     }, [searchTerm, countries])
