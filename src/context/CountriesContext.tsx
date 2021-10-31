@@ -151,12 +151,12 @@ export default function CountriesProvider({ children }: Prop) {
         const lsLastUpdateMilliseconds = Number(localStorage.getItem('@LastUpdate'));
         const secondsSinceLastUpdate = (new Date().getTime() - lsLastUpdateMilliseconds) / 1000;
 
-        if (!lsLastUpdateMilliseconds || secondsSinceLastUpdate > 10) { // mudar aqui
+        if (!lsLastUpdateMilliseconds || secondsSinceLastUpdate > 600) {
             console.log('data from api');
             getCountriesFromApi();
             setLoading(true);
         }
-        else if (lsLastUpdateMilliseconds && secondsSinceLastUpdate < 10) { // mudar aqui
+        else if (lsLastUpdateMilliseconds && secondsSinceLastUpdate < 600) {
             getCountriesFromLocalStorage();
         }
 
