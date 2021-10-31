@@ -104,13 +104,15 @@ export default function CountriesProvider({ children }: Prop) {
     // getCountries 
     React.useEffect(() => {
         let names: string[] = [];
+        let globalDataInUseEffect = {confirmed: 0, deaths: 0};
 
         async function getCountriesFromApi() {
             fetch("https://covid-api.mmediagroup.fr/v1/cases")
                 .then(res => res.json())
                 .then(data => {
                     const {confirmed, deaths} = data["Global"].All;
-                    setGlobalData({confirmed, deaths});
+                    globalDataInUseEffect = {confirmed, deaths};
+                    setGlobalData(globalDataInUseEffect);
                     names = Object.keys(data);
                     return Object.values<ApiData>(data);
                 })
@@ -129,7 +131,7 @@ export default function CountriesProvider({ children }: Prop) {
                     const lastUpdateTimeStampString = new Date().getTime().toString();
                     localStorage.setItem('@LastUpdate', lastUpdateTimeStampString);
                     localStorage.setItem('@CountriesData', JSON.stringify(formatedCountries));
-                    localStorage.setItem('@GlobalData', JSON.stringify(globalData))
+                    localStorage.setItem('@GlobalData', JSON.stringify(globalDataInUseEffect))
                     setCountries(formatedCountries);
                     setLoading(false);
                 });
@@ -160,7 +162,7 @@ export default function CountriesProvider({ children }: Prop) {
             getCountriesFromLocalStorage();
         }
 
-    }, [globalData]);
+    }, []);
 
     return (
         <CountriesContext.Provider value={{ returnCurrentPageData, returnCountryByTerm, pagesCount, loading, countriesSearch, globalData,search: {searchTerm, setSearchTerm}}}>
