@@ -160,7 +160,7 @@ export default function CountriesProvider({ children }: Prop) {
             getCountriesFromLocalStorage();
         }
 
-    }, []);
+    }, [globalData]);
 
     return (
         <CountriesContext.Provider value={{ returnCurrentPageData, returnCountryByTerm, pagesCount, loading, countriesSearch, globalData,search: {searchTerm, setSearchTerm}}}>
