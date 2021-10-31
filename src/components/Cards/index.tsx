@@ -12,10 +12,6 @@ export function Cards() {
     const {returnCurrentPageData, loading, countriesSearch, search} = useContext(CountriesContext);
     const match = useRouteMatch<matchType>();
 
-    React.useEffect(() => {
-        console.log('mudou');
-    })
-
     return (
         <C.Container>
             {

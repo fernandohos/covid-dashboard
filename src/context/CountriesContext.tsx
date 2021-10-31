@@ -28,6 +28,10 @@ type ContextType = {
         setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
     };
     countriesSearch: CountryType[];
+    globalData: {
+        confirmed: number;
+        deaths: number;
+    }
 }
 
 export const CountriesContext = createContext({} as ContextType);
@@ -40,6 +44,7 @@ export default function CountriesProvider({ children }: Prop) {
 
     const [countriesSearch, setCountriesSearch] = React.useState<CountryType[]>([]);
     const [searchTerm, setSearchTerm] = React.useState('');
+    const [globalData, setGlobalData] = React.useState<{confirmed: number, deaths: number}>({confirmed: 0, deaths: 0});
 
     React.useEffect(() => {
         function returnCountriesFromSearch() {
@@ -104,6 +109,8 @@ export default function CountriesProvider({ children }: Prop) {
             fetch("https://covid-api.mmediagroup.fr/v1/cases")
                 .then(res => res.json())
                 .then(data => {
+                    const {confirmed, deaths} = data["Global"].All;
+                    setGlobalData({confirmed, deaths});
                     names = Object.keys(data);
                     return Object.values<ApiData>(data);
                 })
@@ -122,6 +129,7 @@ export default function CountriesProvider({ children }: Prop) {
                     const lastUpdateTimeStampString = new Date().getTime().toString();
                     localStorage.setItem('@LastUpdate', lastUpdateTimeStampString);
                     localStorage.setItem('@CountriesData', JSON.stringify(formatedCountries));
+                    localStorage.setItem('@GlobalData', JSON.stringify(globalData))
                     setCountries(formatedCountries);
                     setLoading(false);
                 });
@@ -133,24 +141,29 @@ export default function CountriesProvider({ children }: Prop) {
             if (countriesFromLs) {
                 setCountries(JSON.parse(countriesFromLs));
             }
+
+            const globalDataFromLs = localStorage.getItem('@GlobalData');
+            if(globalDataFromLs) {
+                setGlobalData(JSON.parse(globalDataFromLs));
+            }
         }
 
         const lsLastUpdateMilliseconds = Number(localStorage.getItem('@LastUpdate'));
         const secondsSinceLastUpdate = (new Date().getTime() - lsLastUpdateMilliseconds) / 1000;
 
-        if (!lsLastUpdateMilliseconds || secondsSinceLastUpdate > 600) {
+        if (!lsLastUpdateMilliseconds || secondsSinceLastUpdate > 10) { // mudar aqui
             console.log('data from api');
             getCountriesFromApi();
             setLoading(true);
         }
-        else if (lsLastUpdateMilliseconds && secondsSinceLastUpdate < 600) {
+        else if (lsLastUpdateMilliseconds && secondsSinceLastUpdate < 10) { // mudar aqui
             getCountriesFromLocalStorage();
         }
 
     }, []);
 
     return (
-        <CountriesContext.Provider value={{ returnCurrentPageData, returnCountryByTerm, pagesCount, loading, countriesSearch,search: {searchTerm, setSearchTerm}}}>
+        <CountriesContext.Provider value={{ returnCurrentPageData, returnCountryByTerm, pagesCount, loading, countriesSearch, globalData,search: {searchTerm, setSearchTerm}}}>
             {children}
         </CountriesContext.Provider>
     )

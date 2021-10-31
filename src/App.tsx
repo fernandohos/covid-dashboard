@@ -8,7 +8,7 @@ import {Pagination} from './components/Pagination';
 import { CountriesContext } from './context/CountriesContext';
 
 function App() {
-  const {search} = useContext(CountriesContext);
+  const {search, globalData} = useContext(CountriesContext);
 
   function handleFormSubmit(e: FormEvent) {
     e.preventDefault();
@@ -24,11 +24,11 @@ function App() {
               <C.CasesWrapper>
                 <div className="confirmed">
                   <h3>confirmed</h3>
-                  <p>240.630.839</p>
+                  <p>{globalData.confirmed}</p>
                 </div>
                 <div className="deaths">
                   <h3>deahts</h3>
-                  <p>4.890.776</p>
+                  <p>{globalData.deaths}</p>
                 </div>
               </C.CasesWrapper>
               <C.SearchBar xIcon={xImg}>
