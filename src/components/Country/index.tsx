@@ -116,15 +116,15 @@ export function Country() {
                     </div>
                     <div>
                         <h2>Population</h2>
-                        <p>{country.population}</p>
+                        <p>{country.population.toLocaleString()}</p>
                     </div>
                     <div>
                         <h3>Confirmed</h3>
-                        <C.Cases color="#4f4" className="cases">{country.confirmed}</C.Cases>
+                        <C.Cases color="#4f4" className="cases">{country.confirmed.toLocaleString()}</C.Cases>
                     </div>
                     <div>
                         <h3>Deaths</h3>
-                        <C.Cases color="#f44" className="cases">{country.deaths}</C.Cases>
+                        <C.Cases color="#f44" className="cases">{country.deaths.toLocaleString()}</C.Cases>
                     </div>
 
                     <C.Chart>
