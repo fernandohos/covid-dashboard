@@ -24,11 +24,11 @@ function App() {
               <C.CasesWrapper>
                 <div className="confirmed">
                   <h3>confirmed</h3>
-                  <p>{globalData.confirmed}</p>
+                  <p>{globalData.confirmed.toLocaleString()}</p>
                 </div>
                 <div className="deaths">
                   <h3>deahts</h3>
-                  <p>{globalData.deaths}</p>
+                  <p>{globalData.deaths.toLocaleString()}</p>
                 </div>
               </C.CasesWrapper>
               <C.SearchBar xIcon={xImg}>
