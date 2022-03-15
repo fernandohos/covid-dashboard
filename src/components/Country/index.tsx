@@ -4,13 +4,10 @@ import { useRouteMatch, useLocation } from 'react-router-dom';
 import * as C from './styles';
 import * as Continents from '../Continents';
 import { Line } from 'react-chartjs-2';
+import { useQuery } from '../../hooks/useQuery';
 
 type RouteMatchType = {
     country: string;
-}
-
-function useQuery(search: string) {
-    return new URLSearchParams(search);
 }
 
 enum Historic {
@@ -62,14 +59,14 @@ export function Country() {
                         return totalCases - newDataApi[i - 1];
                     });
                     setDates(newDatesApi.reverse());
-                    if(type === Historic.CONFIRMED) {
+                    if (type === Historic.CONFIRMED) {
                         setData(prev => ({
                             ...prev,
                             cases: newDataApi,
                             casesPerWeek
                         }));
-                    } 
-                    else if(type === Historic.DEATHS) {
+                    }
+                    else if (type === Historic.DEATHS) {
                         setData(prev => ({
                             ...prev,
                             deaths: newDataApi,
