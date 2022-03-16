@@ -51,11 +51,11 @@ export function Card({ country, abbreviation, confirmed, deaths, continent }: Pr
                 <C.CountryName>{country}</C.CountryName>
                 <C.CountryAbbr>{abbreviation}</C.CountryAbbr>
                 <C.StatsTitle>Confirmed</C.StatsTitle>
-                <C.StatsInfo color="#4f4">{confirmed}</C.StatsInfo>
+                <C.StatsInfo color="#4f4">{confirmed.toLocaleString()}</C.StatsInfo>
                 <div>
                     <div>
                         <C.StatsTitle>Deaths</C.StatsTitle>
-                        <C.StatsInfo color="#f44">{deaths}</C.StatsInfo>
+                        <C.StatsInfo color="#f44">{deaths.toLocaleString()}</C.StatsInfo>
                     </div>
                     <img src={returnContinent(continent)} alt={continent} />
                 </div>
