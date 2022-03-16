@@ -1,12 +1,4 @@
-<div align="center">
-  
-# Building...
-  
-</div>
 
-<div align="center">
-  <h1>⚠ 🏗 ⚠</h1>
-</div>
 <!-- TITLE -->
 <div align="center">
    <img src="https://github.com/fernandohos/covid-dashboard/blob/main/.github/title.png" width="40%" alt="covid dashboard" />
