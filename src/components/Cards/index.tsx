@@ -11,11 +11,15 @@ type matchType = {
 export function Cards() {
     const {returnCurrentPageData, loading, countriesSearch, search} = useContext(CountriesContext);
     const match = useRouteMatch<matchType>();
+    console.log("RETURN CURRENT PAGE DATA", returnCurrentPageData(Number(match.params.page)));
 
     return (
         <C.Container>
             {
                 loading && <p>loading...</p>
+            }
+            {
+                returnCurrentPageData(1).length === 0 && <p>api down :&#40;</p>
             }
             {
                 countriesSearch && countriesSearch && [] && search.searchTerm !== '' ?

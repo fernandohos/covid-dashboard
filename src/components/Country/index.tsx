@@ -106,6 +106,10 @@ export function Country() {
         }
     }
 
+    if(Object.keys(country).length === 0) {
+        return <p>api down :&#40;</p>
+    }
+
     return (
         <C.Container>
             <div className="container">
