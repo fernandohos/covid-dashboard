@@ -21,3 +21,7 @@ export const Container = styled.div`
         grid-template-columns: repeat(1, 25rem);
     }
 `;
+
+export const LoaderContainer = styled.div`
+    margin: 5rem auto;
+`;

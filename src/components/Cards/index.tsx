@@ -3,6 +3,7 @@ import * as C from './styles';
 import { Card } from '../Card';
 import {CountriesContext} from '../../context/CountriesContext';
 import {useRouteMatch} from 'react-router-dom';
+import {Loader} from '../Loader';
 
 type matchType = {
     page: string;
@@ -13,11 +14,8 @@ export function Cards() {
     const match = useRouteMatch<matchType>();
     console.log("RETURN CURRENT PAGE DATA", returnCurrentPageData(Number(match.params.page)));
 
-    return (
+    return !loading ? (
         <C.Container>
-            {
-                loading && <p>loading...</p>
-            }
             {
                 returnCurrentPageData(1).length === 0 && <p>api down :&#40;</p>
             }
@@ -33,5 +31,5 @@ export function Cards() {
                 ))
             }
         </C.Container>
-    );
+    ) : <C.LoaderContainer><Loader /></C.LoaderContainer>;
 }
