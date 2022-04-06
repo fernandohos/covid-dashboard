@@ -8,9 +8,11 @@
 
 <!-- DEMO -->
 <div align="center">
-  <a target="_blank" href="https://covid-dezenove.netlify.app">
-    <img src="https://github.com/fernandohos/covid-dashboard/blob/main/.github/demo-on-netlify.png" width="30%" alt="demo on netlify" />            
-  </a>
+   <a href="https://fasthome.vercel.app">
+      <img src="https://therealsujitk-vercel-badge.vercel.app/?app=fasthome&style=for-the-badge" alt="deployment vercel status" />
+      <br />
+      Demo on Vercel
+   </a>
 </div>
 
 <br>
@@ -79,7 +81,9 @@
 
 <!-- DEMO -->
 <div align="center">
-  <a target="_blank" href="https://covid-dezenove.netlify.app">
-    <img src="https://github.com/fernandohos/covid-dashboard/blob/main/.github/demo-on-netlify.png" width="30%" alt="demo on netlify" />            
-  </a>
+   <a href="https://fasthome.vercel.app">
+      <img src="https://therealsujitk-vercel-badge.vercel.app/?app=fasthome&style=for-the-badge" alt="deployment vercel status" />
+      <br />
+      Demo on Vercel
+   </a>
 </div>
