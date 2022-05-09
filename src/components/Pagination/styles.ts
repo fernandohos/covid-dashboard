@@ -89,7 +89,7 @@ export const PageLink = styled.div<{currentPage: number}>`
         justify-content: center;
         width: inherit;
         height: inherit;
-        color: #fff;
+        color: var(--text-color);
         font-size: 2rem;
         text-decoration: none;
     }
