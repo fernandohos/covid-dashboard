@@ -1,4 +1,5 @@
 import React, { createContext, ReactNode } from 'react';
+import countriesDataJSON from '../countries-data.json';
 
 type Prop = {
     children: ReactNode;
@@ -134,7 +135,7 @@ export default function CountriesProvider({ children }: Prop) {
                     localStorage.setItem('@GlobalData', JSON.stringify(globalDataInUseEffect))
                     setCountries(formatedCountries);
                     setLoading(false);
-                });
+                }).catch(error => console.log(error));
         }
 
         function getCountriesFromLocalStorage() {
@@ -155,12 +156,17 @@ export default function CountriesProvider({ children }: Prop) {
 
         if (!lsLastUpdateMilliseconds || secondsSinceLastUpdate > 600) {
             console.log('data from api');
-            getCountriesFromApi();
             setLoading(true);
+            getCountriesFromApi();
+            setLoading(false);
         }
         else if (lsLastUpdateMilliseconds && secondsSinceLastUpdate < 600) {
+            console.log('data from storage');
             getCountriesFromLocalStorage();
         }
+        // FOLLOWING LINE ADDED BECAUSE COVID API IS DEPRECATED
+        console.log('data from json');
+        setCountries(countriesDataJSON);
 
     }, []);
 
