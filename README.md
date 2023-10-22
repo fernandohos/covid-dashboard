@@ -8,7 +8,7 @@
 
 <!-- DEMO -->
 <div align="center">
-   <a href="https://fasthome.vercel.app">
+   <a href="https://covid-dezenove.vercel.app">
       <img src="https://therealsujitk-vercel-badge.vercel.app/?app=fasthome&style=for-the-badge" alt="deployment vercel status" />
       <br />
       Demo on Vercel
@@ -81,7 +81,7 @@
 
 <!-- DEMO -->
 <div align="center">
-   <a href="https://fasthome.vercel.app">
+   <a href="https://covid-dezenove.vercel.app">
       <img src="https://therealsujitk-vercel-badge.vercel.app/?app=fasthome&style=for-the-badge" alt="deployment vercel status" />
       <br />
       Demo on Vercel
