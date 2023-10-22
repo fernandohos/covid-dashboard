@@ -1,15 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import { GlobalStyle } from './styles/global';
-import CountriesProvider from './context/CountriesContext';
+import React from "react";
+import App from "./App";
+import { GlobalStyle } from "./styles/global";
+import CountriesProvider from "./context/CountriesContext";
+import { createRoot } from "react-dom/client";
 
-ReactDOM.render(
+const container = document.getElementById("root");
+const root = createRoot(container!);
+
+root.render(
   <React.StrictMode>
     <CountriesProvider>
-    <GlobalStyle />
-    <App />
+      <GlobalStyle />
+      <App />
     </CountriesProvider>
-  </React.StrictMode>,
-  document.getElementById('root')
+  </React.StrictMode>
 );
