@@ -6,11 +6,10 @@ import { useCountry } from "../../hooks/useCountry";
 import { useContext } from "react";
 import { CountriesContext } from "../../context/CountriesContext";
 import Continent from "../Continent";
-import {CategoryScale} from 'chart.js'; 
-import Chart from 'chart.js/auto';
+import { CategoryScale } from "chart.js";
+import Chart from "chart.js/auto";
 
 Chart.register(CategoryScale);
-
 
 type RouteMatchType = {
   country: string;
@@ -22,8 +21,6 @@ export function Country() {
   const { returnCountryByTerm } = useContext(CountriesContext);
   const match = useRouteMatch<RouteMatchType>();
   let country = returnCountryByTerm(match.params.country, "abbreviation");
-
-  console.log("COUNTRY ", country);
 
   if (!country) return <p>loading...</p>;
 

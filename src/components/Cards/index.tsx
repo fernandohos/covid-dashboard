@@ -12,7 +12,6 @@ type matchType = {
 export function Cards() {
     const {returnCurrentPageData, loading, countriesSearch, search} = useContext(CountriesContext);
     const match = useRouteMatch<matchType>();
-    console.log("RETURN CURRENT PAGE DATA", returnCurrentPageData(Number(match.params.page)));
 
     return !loading ? (
         <C.Container>
@@ -22,7 +21,6 @@ export function Cards() {
             {
                 countriesSearch && countriesSearch && [] && search.searchTerm !== '' ?
                 countriesSearch.map((country, i) => {
-                    console.log(countriesSearch);
                     return <Card key={i} {...country} />
                 })
                 :
