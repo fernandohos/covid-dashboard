@@ -4,6 +4,7 @@ export const Container = styled.div`
     background: var(--gradient);
     width: 25rem;
     border-radius: 1.4rem;
+    cursor: pointer;
     
     .wrapper {
         background: var(--card-background);
