@@ -196,5 +196,7 @@ export default function Continent({ continent }: { continent: string }) {
       return <Oceania />;
     case "Asia":
       return <Asia />;
+    default:
+      return <></>;
   }
 }
